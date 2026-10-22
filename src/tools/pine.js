@@ -53,11 +53,11 @@ export function registerPineTools(server) {
     catch (err) { return jsonResult({ success: false, error: err.message }, true); }
   });
 
-  server.tool('pine_open', 'Open a saved Pine Script by name', {
+  server.tool('pine_open', 'Open a saved Pine Script by name via the editor\'s "Open script" dialog. Fails rather than loading its source into a different script.', {
     name: z.string().describe('Name of the saved script to open (case-insensitive match)'),
   }, async ({ name }) => {
     try { return jsonResult(await core.openScript({ name })); }
-    catch (err) { return jsonResult({ success: false, source: 'internal_api', error: err.message }, true); }
+    catch (err) { return jsonResult({ success: false, error: err.message }, true); }
   });
 
   server.tool('pine_list_scripts', 'List saved Pine Scripts', {}, async () => {
